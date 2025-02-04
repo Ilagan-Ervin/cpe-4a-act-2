@@ -6,24 +6,26 @@ import inquirer from 'inquirer';
 
 inquirer 
 .prompt([{
-    message: 'who you?',
-    name: "nem"
+    message: 'who are you?',
+    name: "name"
 }])
 
 .then((answers) => {
-    var SN = generateStupidName();
-    var SHN = randomSuperhero();
-    var qr_nem = qr.image(answers.nem, {type: 'png'});
-    var qr_SN = qr.image(SN, {type: 'png'});
-    var qr_SHN = qr.image(SHN, {type: 'png'});
+    var sillyname  = generateStupidName();
+    var superheroname = randomSuperhero();
+    var qr_name = qr.image(answers.name, {type: 'png'});
+    var qr_sillyname = qr.image(sillyname, {type: 'png'});
+    var qr_superheroname = qr.image(superheroname, {type: 'png'});
 
-    const content = `your name is ${answers.nem}\nand your silly name is ${SN}\nand your super hero name is ${SHN}`;
+    const content = `your name is ${answers.name}\nand your villain name is ${sillyname}\nand your superhero name is ${superheroname}`;
 
-    qr_nem.pipe(fs.createWriteStream('nem.png'));
-    qr_SN.pipe(fs.createWriteStream('SN.png'));
-    qr_SHN.pipe(fs.createWriteStream('SHN.png'));
+    qr_name.pipe(fs.createWriteStream('name.png'));
+    qr_sillyname.pipe(fs.createWriteStream('sillyname.png'));
+    qr_superheroname.pipe(fs.createWriteStream('superheroname.png'));
 
-    fs.writeFileSync('content.txt', content);
+    fs.writeFileSync('myhero.txt', content);
 
-    console.log(content);
+    console.log(content)
+    console.log('QR codes for your name, villain name and superhero name is generated');
+    console.log('myhero.txt is updated')
 });
